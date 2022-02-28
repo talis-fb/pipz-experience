@@ -27,12 +27,6 @@ export const Products = () => {
   const tudo = useSelector((state) => state["store"]);
   const tudoAccoun = useSelector((state) => state["account"].user);
 
-  console.log("aaaaa");
-  // console.log(products);
-  // console.log(tudo);
-  // console.log(tudoAccoun);
-  // console.log(!!tudoAccoun);
-
   const addToCart = (id) => {
     const newCart = { ...cart };
     if (!newCart[id]) {
