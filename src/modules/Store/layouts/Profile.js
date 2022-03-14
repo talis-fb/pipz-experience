@@ -13,13 +13,14 @@ export const Profile = ({ children }) => {
       }}
     >
       <Header />
-      <Grid columns={"200px auto"}>
+      <Grid columns={"200px auto"} sx={{ height: '100%', width: '100%' }}>
         <Flex
           sx={{
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
+              height: '100%'
           }}
         >
           <Button>
@@ -33,7 +34,16 @@ export const Profile = ({ children }) => {
           </Button>
         </Flex>
 
+        <Flex sx={{ 
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+              height: '100%',
+            width: '100%'
+        }}>
         {children}
+      </Flex>
       </Grid>
     </Column>
   );

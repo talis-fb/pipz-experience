@@ -17,7 +17,7 @@ export const Product2 = () => {
     <Card bg="l0" m="32px" sx={{ height: "fit-content" }}>
       <Flex bg="l2" sx={{ width: "100%", height: "100%" }}>
 
-        <Image src={"https://www.paodeacucar.com/img/uploads/1/892/586892.png"} />
+        <Image sx={{ width: '100px', height: '200px' }} src={"https://www.paodeacucar.com/img/uploads/1/892/586892.png"} />
 
         <Column sx={{ flexGrow: 2 }}>
           <Text>Titulo invocado do vinho</Text>

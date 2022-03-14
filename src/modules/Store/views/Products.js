@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +14,11 @@ import {
   Grid,
   Image,
   Text,
+  Portal,
   LoginForm,
 } from "tomato";
+
+import { Product2 as ProductView } from './Product2'
 
 export const Products = () => {
   const dispatch = useDispatch();
@@ -26,6 +30,8 @@ export const Products = () => {
   const cart = useSelector((state) => state["store"].cart);
   const tudo = useSelector((state) => state["store"]);
   const tudoAccoun = useSelector((state) => state["account"].user);
+
+  const [ productPreview, setProductPreview ] = useState(true);
 
   const addToCart = (id) => {
     const newCart = { ...cart };
@@ -50,6 +56,7 @@ export const Products = () => {
       }}
       gap="16px 32px"
     >
+
       {Object.values(products).map((product, index) => (
         <Column key={product.id}>
           <Card
@@ -105,6 +112,34 @@ export const Products = () => {
           </Button>
         </Column>
       ))}
+
+
+    { productPreview && (
+      <Portal>
+        <div
+      sx={{
+        position: "fixed",
+          top: "0px",
+          left: "0px",
+          width: "100%",
+          // maxWidth: "90%",
+          // maxHeight: "600px",
+          width: '100%',
+          height: '100%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#44444477",
+          transition: "all 2s",
+      }}
+      id="background-login"
+      >
+          <ProductView/>
+      </div>
+    </Portal>
+    )}
+
+
       <Form
         object={{
           campo1: true,

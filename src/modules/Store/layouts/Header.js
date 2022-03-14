@@ -129,8 +129,10 @@ export const Header = ({ children }) => {
                 bg: 'white',
                   borderRadius: '5px',
                   padding: "10px",
-                  minHeight: "200px",
-                  maxHeight: "900px"
+                  minHeight: "500px",
+                  maxHeight: "80%",
+                  alignItems: 'center',
+                  justifyContent: 'center'
               }}
               ref={portal}
             >
@@ -161,6 +163,8 @@ export const Header = ({ children }) => {
                   },
                 }}
               ></Form>
+
+        <Button sx={{ alignSelf: 'center' }}>Entrar</Button>
             </Column>
           </div>
         </Portal>
