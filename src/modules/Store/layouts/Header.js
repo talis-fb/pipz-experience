@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import {
   Flex,
+  Column,
   Form,
   LoginForm,
   Button,
@@ -11,6 +12,7 @@ import {
   Text,
   Card,
   Portal,
+  Image
 } from "tomato";
 
 // import Logo from "../assets/logo_winexperience.svg";
@@ -22,9 +24,11 @@ export const Header = ({ children }) => {
   const [loginScreen, setLoginScreen] = useState(false);
 
   const renderLoginButton = () => {
-    if (isLogin)
       return (
-        <Link style={{ textDecoration: "none" }} to="/user">
+        <Link style={{ textDecoration: "none" }} 
+          to={ isLogin ?  "/user" : "" }
+          onClick={ !isLogin && (() => setLoginScreen(true)) }
+          >
           <Flex alignItems="center">
             <Icon.Star />
             <Text
@@ -37,36 +41,13 @@ export const Header = ({ children }) => {
                 borderRadius: "50%",
               }}
             >
-              Oi!
+          {isLogin ? "Oi!" : "Signup/Login"}
             </Text>
           </Flex>
         </Link>
       );
-    else
-      return (
-        <Button
-          style={{ textDecoration: "none" }}
-          to="/login"
-          onClick={() => setLoginScreen(true)}
-        >
-          <Flex alignItems="center">
-            <Icon.Star />
-            <Text
-              bg="l3"
-              ml="4px"
-              sx={{
-                fontSize: "13px",
-                padding: "2px",
-                lineHeight: 1,
-                borderRadius: "50%",
-              }}
-            >
-              Signup/Login
-            </Text>
-          </Flex>
-        </Button>
-      );
   };
+
 
   const Login = () => {
     return (
@@ -91,6 +72,14 @@ export const Header = ({ children }) => {
       </Flex>
     );
   };
+
+  const portal = useRef()
+  useEffect(() => { 
+    document.addEventListener('mousedown', function (event){
+      if ( !portal.current.contains(event.target) )
+        setLoginScreen(false)
+    })
+  }, [])
 
   return (
     <Flex
@@ -117,6 +106,7 @@ export const Header = ({ children }) => {
         </Link>
       </Flex>
 
+      {/* Login Form */}
       {loginScreen && (
         <Portal>
           <div
@@ -133,9 +123,18 @@ export const Header = ({ children }) => {
               transition: "all 2s",
             }}
             id="background-login"
-            onClick={() => console.log("bbbbbbbbb")}
           >
-            <div onClick={() => console.log("aaaaaaaaaa")}>
+            <Column 
+              sx={{
+                bg: 'white',
+                  borderRadius: '5px',
+                  padding: "10px",
+                  minHeight: "200px",
+                  maxHeight: "900px"
+              }}
+              ref={portal}
+            >
+            <Image />
               <Form
                 object={{
                   campo1: "aaa",
@@ -144,24 +143,32 @@ export const Header = ({ children }) => {
                   sections: {
                     1: {
                       rows: [
-                        { type: "title", value: "teste", name: "titulo" },
+                        { type: "title", value: "Bem-Vindo ao Winexperience", name: "bem-vindo" },
                         {
-                          name: "campo1",
-                          label: "campo1",
+                          name: "email",
+                          // label: "Email",
                           required: true,
-                          placeholder: "Opaaa",
+                          placeholder: "Email",
                         },
+                        {
+                          name: "password",
+                          // label: "Password",
+                          required: true,
+                          placeholder: "Password",
+                        }
                       ],
                     },
                   },
                 }}
               ></Form>
-              <Button onClick={() => setLoginScreen(false)}>Fechar </Button>
-            </div>
+            </Column>
           </div>
         </Portal>
       )}
+
+
       <Flex>{renderLoginButton()}</Flex>
+
     </Flex>
   );
 };

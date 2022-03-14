@@ -1,4 +1,4 @@
-import { Products, Product, Cart } from "../views";
+import { Products, Product, Product2, Cart } from "../views";
 import { Home, Product as ProductLayout } from "../layouts";
 
 export const shop = [
@@ -24,6 +24,6 @@ export const shop = [
     authenticated: true,
     route: "/product/:id",
     layout: ProductLayout,
-    view: Product,
+    view: Product2,
   },
 ];
