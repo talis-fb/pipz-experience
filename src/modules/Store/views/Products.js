@@ -18,6 +18,8 @@ import {
   LoginForm,
 } from "tomato";
 
+// import {} from './'
+
 import { Product2 as ProductView } from './Product2'
 
 export const Products = () => {
@@ -31,7 +33,7 @@ export const Products = () => {
   const tudo = useSelector((state) => state["store"]);
   const tudoAccoun = useSelector((state) => state["account"].user);
 
-  const [ productPreview, setProductPreview ] = useState(true);
+  const [ productPreview, setProductPreview ] = useState(false);
 
   const addToCart = (id) => {
     const newCart = { ...cart };
@@ -139,27 +141,6 @@ export const Products = () => {
     </Portal>
     )}
 
-
-      <Form
-        object={{
-          campo1: true,
-        }}
-        schema={{
-          sections: {
-            1: {
-              rows: [
-                { type: "title", value: "teste", name: "titulo" },
-                {
-                  name: "campo1",
-                  label: "campo1",
-                  required: true,
-                  placeholder: "Opaaa",
-                },
-              ],
-            },
-          },
-        }}
-      ></Form>
     </Grid>
   );
 };

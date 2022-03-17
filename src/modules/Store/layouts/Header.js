@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,8 @@ import {
   Portal,
   Image
 } from "tomato";
+
+import { PortalForm } from '../components'
 
 // import Logo from "../assets/logo_winexperience.svg";
 
@@ -73,14 +75,6 @@ export const Header = ({ children }) => {
     );
   };
 
-  const portal = useRef()
-  useEffect(() => { 
-    document.addEventListener('mousedown', function (event){
-      if ( !portal.current.contains(event.target) )
-        setLoginScreen(false)
-    })
-  }, [])
-
   return (
     <Flex
       p="16px"
@@ -108,66 +102,37 @@ export const Header = ({ children }) => {
 
       {/* Login Form */}
       {loginScreen && (
-        <Portal>
-          <div
-            sx={{
-              position: "fixed",
-              top: "0px",
-              left: "0px",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#44444477",
-              transition: "all 2s",
-            }}
-            id="background-login"
-          >
-            <Column 
-              sx={{
-                bg: 'white',
-                  borderRadius: '5px',
-                  padding: "10px",
-                  minHeight: "500px",
-                  maxHeight: "80%",
-                  alignItems: 'center',
-                  justifyContent: 'center'
-              }}
-              ref={portal}
-            >
-            <Image />
+        <PortalForm close={() => setLoginScreen(false)}>
+              <Image />
               <Form
-                object={{
-                  campo1: "aaa",
-                }}
-                schema={{
-                  sections: {
-                    1: {
-                      rows: [
-                        { type: "title", value: "Bem-Vindo ao Winexperience", name: "bem-vindo" },
-                        {
-                          name: "email",
-                          // label: "Email",
-                          required: true,
-                          placeholder: "Email",
-                        },
-                        {
-                          name: "password",
-                          // label: "Password",
-                          required: true,
-                          placeholder: "Password",
-                        }
-                      ],
+            object={{
+              campo1: "aaa",
+            }}
+            schema={{
+              sections: {
+                1: {
+                  rows: [
+                    { type: "title", value: "Bem-Vindo ao Winexperience", name: "bem-vindo" },
+                    {
+                      name: "email",
+                      // label: "Email",
+                      required: true,
+                      placeholder: "Email",
                     },
-                  },
-                }}
-              ></Form>
+                    {
+                      name: "password",
+                      // label: "Password",
+                      required: true,
+                      placeholder: "Password",
+                    }
+                  ],
+                },
+              },
+            }}
+            ></Form>
 
-        <Button sx={{ alignSelf: 'center' }}>Entrar</Button>
-            </Column>
-          </div>
-        </Portal>
+          <Button sx={{ alignSelf: 'center' }}>Entrar</Button>
+        </PortalForm>
       )}
 
 
